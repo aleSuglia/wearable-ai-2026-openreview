@@ -1,0 +1,126 @@
+{
+  "title": {
+    "order": 1,
+    "description": "Title of paper. Add TeX formulas using the following formats: $In-line Formula$ or $$Block Formula$$.",
+    "value": {
+      "param": {
+        "type": "string",
+        "regex": "^.{1,250}$"
+      }
+    }
+  },
+  "authors": {
+    "order": 2,
+    "description": "Search author profile by name or profile ID. All authors must have an OpenReview profile prior to submitting a paper.",
+    "value": {
+      "param": {
+        "type": "author{}",
+        "properties": {
+          "fullname": {
+            "param": {
+              "type": "string"
+            }
+          },
+          "username": {
+            "param": {
+              "type": "string",
+              "regex": "^~\\S+$",
+              "mismatchError": "must be a valid profile ID"
+            }
+          },
+          "institutions": {
+            "param": {
+              "type": "object{}",
+              "properties": {
+                "name": {
+                  "param": {
+                    "type": "string"
+                  }
+                },
+                "domain": {
+                  "param": {
+                    "type": "string"
+                  }
+                },
+                "country": {
+                  "param": {
+                    "type": "string"
+                  }
+                }
+              },
+              "optional": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "corresponding_author_name": {
+    "value": {
+      "param": {
+        "type": "string"
+      }
+    },
+    "readers": [
+      "<venue id>",
+      "<venue id>/Submission${{4/id}/number}/Authors"
+    ],
+    "order": 3
+  },
+  "corresponding_author_email": {
+    "value": {
+      "param": {
+        "type": "string",
+        "regex": "[a-z0-9_\\-\\.]{1,}@[a-z0-9_\\-\\.]{2,}\\.[a-z]{2,}"
+      }
+    },
+    "readers": [
+      "<venue id>",
+      "<venue id>/Submission${{4/id}/number}/Authors"
+    ],
+    "order": 4
+  },
+  "abstract": {
+    "order": 5,
+    "description": "Abstract of paper. Add TeX formulas using the following formats: $In-line Formula$ or $$Block Formula$$.",
+    "value": {
+      "param": {
+        "type": "string",
+        "maxLength": 5000,
+        "markdown": true,
+        "input": "textarea"
+      }
+    }
+  },
+  "pdf": {
+    "order": 6,
+    "description": "Upload a PDF file that ends with .pdf.",
+    "value": {
+      "param": {
+        "type": "file",
+        "maxSize": 50,
+        "extensions": [
+          "pdf"
+        ],
+        "optional": true
+      }
+    }
+  },
+  "venue": {
+    "value": {
+      "param": {
+        "const": "<venue short name> Submission",
+        "hidden": true
+      }
+    }
+  },
+  "venueid": {
+    "value": {
+      "param": {
+        "const": "<venue id>/Submission",
+        "hidden": true
+      }
+    }
+  },
+  "authorids": {"delete": true}
+}
